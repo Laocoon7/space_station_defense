@@ -1,0 +1,69 @@
+################################
+#########       Package
+################################
+[package]
+name = "space_station_defense"
+version = "0.1.0"
+edition = "2021"
+
+################################
+#########       Features
+################################
+[features]
+default = [
+    "bevy/bevy_winit",
+    "bevy/bevy_render",
+    "bevy/bevy_asset",
+    "bevy/bevy_sprite",
+    "bevy/png",
+    "bevy/bevy_core_pipeline",
+    "bevy/bevy_text",
+    "bevy/bevy_ui",
+    "bevy/bevy_pbr",
+    "bevy/hdr",
+    "bevy/zstd",
+    "bevy/ktx2",
+    "bevy/tonemapping_luts",
+]
+
+dev = []
+
+################################
+#########       Optimizations
+################################
+[profile.dev]
+opt-level = 1 # Minor for us
+[profile.dev.package."*"]
+opt-level = 3 # Major for everyone else
+
+################################
+#########       Dependencies
+################################
+[dependencies]
+bevy = { version = "0.11", default-features = false } # A refreshingly simple data-driven game engine and app framework
+bevy_rapier2d = { version = "0.22", features = ["serde-serialize", "simd-nightly"] } # 3-dimensional physics engine in Rust, official Bevy plugin.
+bevy_egui = { version = "0.21", features = ["serde"] } # A plugin for Egui integration into Bevy
+bevy_common_assets = { version = "0.7", features = ["ron"] } # Bevy plugin adding support for common asset formats such as json and yaml
+leafwing-input-manager = { version = "0.10", default-features = false, features = [] } # A powerfully direct stateful input manager for the Bevy game engine.
+
+serde = { version = "1", features = ["derive", "rc", "alloc"] } # A generic serialization/deserialization framework
+ron = { version = "0.8", features = ["integer128"] } # Rusty Object Notation
+toml = "0.8" # A native Rust encoder and decoder of TOML-formatted files and streams
+anyhow = "1.0" # Flexible concrete Error type built on std::error::Error
+lazy_static = "1.4" # A macro for declaring lazily evaluated statics in Rust.
+bitflags = "2.3" # A macro to generate structures which behave like bitflags.
+directories = "5.0" # a mid-level library that provides config/cache/data paths, following the respective conventions on Linux, macOS and Windows
+
+rand = "0.8" # Random number generators and other randomness functionality.
+rand_pcg = { version = "0.3", features = ["serde1"] } # Selected PCG random number generators
+xxhash-rust = { version = "0.8", features = ["xxh3", "const_xxh3"] } # Implementation of xxhash
+noise = "0.8" # Procedural noise generation library.
+
+grid_2d = { version = "0.15", features = ["serialize"] } # A general purpose 2d grid
+coord_2d = { version = "0.3", features = ["serialize"] } # A general purpose 2d coordinate
+direction = { version = "0.18", features = ["rand", "serialize"] } # Representations of directions
+grid_shapes = { git = "https://github.com/Laocoon7/grid_shapes", rev = "9eabcd51ddca7fd3cfa90a7ada48161a206b6203", features = ["serde", "extentions"] }
+
+# keep the following in sync with Bevy's dependencies
+winit = { version = "0.28", default-features = false } # Cross-platform window creation library.
+image = { version = "0.24", default-features = false } # Imaging library written in Rust. Provides basic filters and decoders for the most common image formats.

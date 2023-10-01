@@ -1,0 +1,7 @@
+/target
+/.aesprite
+/.vscode
+/.cargo
+/.obsidian
+/save
+settings.toml
