@@ -12,3 +12,6 @@ pub use self::enemy_type::*;
 
 mod polar;
 pub use self::polar::*;
+
+mod ship_type;
+pub use self::ship_type::*;

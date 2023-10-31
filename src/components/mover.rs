@@ -25,9 +25,9 @@ impl Mover {
                 transform.translation += (direction * time.delta_seconds() * speed).extend(0.0)
             },
             MovementType::Theta(theta) => {
-                let mut polar: Polar = transform.translation.truncate().into();
-                polar.t += theta;
-                transform.translation = Vec2::from(polar).extend(transform.translation.z);
+                let mut polar = Polar::from_vec2(transform.translation.truncate());
+                polar.theta += theta;
+                transform.translation = polar.to_vec2().extend(transform.translation.z);
             },
         }
     }
