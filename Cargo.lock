@@ -250,12 +250,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b9441c6b2fe128a7c2bf680a44c34d0df31ce09e5b7e401fcca3faa483dbc921"
 
 [[package]]
-name = "atomic_refcell"
-version = "0.1.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "112ef6b3f6cb3cb6fc5b6b494ef7a848492cff1ab0ef4de10b0f7d572861c905"
-
-[[package]]
 name = "autocfg"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -301,6 +295,16 @@ dependencies = [
  "bevy_app",
  "bevy_derive",
  "bevy_ecs",
+]
+
+[[package]]
+name = "bevy_animations"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bevy",
+ "ron",
+ "serde",
 ]
 
 [[package]]
@@ -457,9 +461,9 @@ dependencies = [
 
 [[package]]
 name = "bevy_egui"
-version = "0.21.0"
+version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1a73a93a8cf6b8c744281d1b88f5b0fa278d608e909af9bbf4eb491a7cb1ad2c"
+checksum = "fb1c1f6ad293c60fd8559c4502cda5e832e92b0e0f3d994929b33f24d4352d70"
 dependencies = [
  "arboard",
  "bevy",
@@ -1189,6 +1193,15 @@ dependencies = [
 [[package]]
 name = "coord_2d"
 version = "0.3.6"
+dependencies = [
+ "glam",
+ "rand 0.8.5",
+ "serde",
+]
+
+[[package]]
+name = "coord_2d"
+version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f1020a2ed8bf43fc850b01db7570c0e4194d3e3d8d806a5f1857d2ab15feec57"
 dependencies = [
@@ -1342,10 +1355,9 @@ dependencies = [
 [[package]]
 name = "direction"
 version = "0.18.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3c56672976b806b6fe8e41998c6d0503cd02479c6059c47451ce8addc7871271"
 dependencies = [
- "coord_2d",
+ "coord_2d 0.3.6",
+ "glam",
  "rand 0.8.5",
  "serde",
 ]
@@ -1385,9 +1397,9 @@ checksum = "9ea835d29036a4087793836fa931b08837ad5e957da9e23886b29586fb9b6650"
 
 [[package]]
 name = "ecolor"
-version = "0.22.0"
+version = "0.23.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2e479a7fa3f23d4e794f8b2f8b3568dd4e47886ad1b12c9c095e141cb591eb63"
+checksum = "cfdf4e52dbbb615cfd30cf5a5265335c217b5fd8d669593cea74a517d9c605af"
 dependencies = [
  "bytemuck",
  "serde",
@@ -1395,9 +1407,9 @@ dependencies = [
 
 [[package]]
 name = "egui"
-version = "0.22.0"
+version = "0.23.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a3aef8ec3ae1b772f340170c65bf27d5b8c28f543a0116c844d2ac08d01123e7"
+checksum = "8bd69fed5fcf4fbb8225b24e80ea6193b61e17a625db105ef0c4d71dde6eb8b7"
 dependencies = [
  "accesskit",
  "ahash",
@@ -1414,9 +1426,9 @@ checksum = "a26ae43d7bcc3b814de94796a5e736d4029efb0ee900c12e2d54c993ad1a1e07"
 
 [[package]]
 name = "emath"
-version = "0.22.0"
+version = "0.23.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3857d743a6e0741cdd60b622a74c7a36ea75f5f8f11b793b41d905d2c9721a4b"
+checksum = "1ef2b29de53074e575c18b694167ccbe6e5191f7b25fe65175a0d905a32eeec0"
 dependencies = [
  "bytemuck",
  "serde",
@@ -1467,13 +1479,12 @@ dependencies = [
 
 [[package]]
 name = "epaint"
-version = "0.22.0"
+version = "0.23.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "09333964d4d57f40a85338ba3ca5ed4716070ab184dcfed966b35491c5c64f3b"
+checksum = "58067b840d009143934d91d8dcb8ded054d8301d7c11a517ace0a99bb1e1595e"
 dependencies = [
  "ab_glyph",
  "ahash",
- "atomic_refcell",
  "bytemuck",
  "ecolor",
  "emath",
@@ -1590,6 +1601,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a62bc1cf6f830c2ec14a513a9fb124d0a213a629668a4186f329db21fe045652"
 dependencies = [
  "percent-encoding",
+]
+
+[[package]]
+name = "fortress"
+version = "0.1.0"
+dependencies = [
+ "bevy_animations",
+ "coord_2d 0.3.6",
+ "direction",
+ "grid_2d 0.15.3",
 ]
 
 [[package]]
@@ -1786,10 +1807,18 @@ checksum = "eec1c01eb1de97451ee0d60de7d81cf1e72aabefb021616027f3d1c3ec1c723c"
 [[package]]
 name = "grid_2d"
 version = "0.15.3"
+dependencies = [
+ "coord_2d 0.3.6",
+ "serde",
+]
+
+[[package]]
+name = "grid_2d"
+version = "0.15.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6dfb23b456edfd3f388df8047a84a367a1168f4606bc21fe1e5dc9606a23689b"
 dependencies = [
- "coord_2d",
+ "coord_2d 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde",
 ]
 
@@ -1798,8 +1827,8 @@ name = "grid_shapes"
 version = "0.1.3"
 source = "git+https://github.com/Laocoon7/grid_shapes?rev=9eabcd51ddca7fd3cfa90a7ada48161a206b6203#9eabcd51ddca7fd3cfa90a7ada48161a206b6203"
 dependencies = [
- "coord_2d",
- "grid_2d",
+ "coord_2d 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "grid_2d 0.15.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde",
 ]
 
@@ -3119,10 +3148,8 @@ dependencies = [
  "bevy_egui",
  "bevy_rapier2d",
  "bitflags 2.4.0",
- "coord_2d",
- "direction",
  "directories",
- "grid_2d",
+ "fortress",
  "grid_shapes",
  "image",
  "lazy_static",

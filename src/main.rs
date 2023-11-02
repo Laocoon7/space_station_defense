@@ -1,25 +1,35 @@
 use bevy::prelude::*;
-use types::{AppState, GameState};
+use bevy_rapier2d::prelude::{NoUserData, RapierConfiguration, RapierPhysicsPlugin};
+use camera_plugin::CamerasPlugin;
+use settings::AppSettings;
+use windows_plugin::WindowsPlugin;
 
-use crate::{resources::ResourcesPlugin, systems::SystemsPlugin, windows::WindowsPlugin};
-
-pub mod builders;
-pub mod components;
-pub mod functions;
-pub mod resources;
+pub mod camera_plugin;
+pub mod objects_plugin;
 pub mod settings;
-pub mod types;
-
-mod systems;
-mod windows;
+pub mod windows_plugin;
 
 fn main() {
+    let tile_size = AppSettings::lock().camera_settings().tile_size as f32;
+
     let mut app = App::new();
 
-    app.add_state::<AppState>();
-    app.add_state::<GameState>();
+    app.insert_resource(RapierConfiguration {
+        gravity: Vec2::ZERO,
+        ..Default::default()
+    });
 
-    app.add_plugins((WindowsPlugin, ResourcesPlugin, SystemsPlugin));
+    app.add_plugins((
+        // Default
+        WindowsPlugin,
+        // External
+        RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(tile_size),
+        #[cfg(feature = "dev")]
+        RapierDebugRenderPlugin::default(),
+        // Ours
+        CamerasPlugin,
+        fortress::prelude::AnimationPlugin,
+    ));
 
     app.run();
 }

@@ -24,6 +24,7 @@ default = [
     "bevy/zstd",
     "bevy/ktx2",
     "bevy/tonemapping_luts",
+    "bevy/serialize",
 ]
 
 dev = []
@@ -42,7 +43,7 @@ opt-level = 3 # Major for everyone else
 [dependencies]
 bevy = { version = "0.11", default-features = false } # A refreshingly simple data-driven game engine and app framework
 bevy_rapier2d = { version = "0.22", features = ["serde-serialize", "simd-nightly"] } # 3-dimensional physics engine in Rust, official Bevy plugin.
-bevy_egui = { version = "0.21", features = ["serde"] } # A plugin for Egui integration into Bevy
+bevy_egui = { version = "0.22", features = ["serde"] } # A plugin for Egui integration into Bevy
 bevy_common_assets = { version = "0.7", features = ["ron"] } # Bevy plugin adding support for common asset formats such as json and yaml
 leafwing-input-manager = { version = "0.10", default-features = false, features = [] } # A powerfully direct stateful input manager for the Bevy game engine.
 
@@ -59,9 +60,7 @@ rand_pcg = { version = "0.3", features = ["serde1"] } # Selected PCG random numb
 xxhash-rust = { version = "0.8", features = ["xxh3", "const_xxh3"] } # Implementation of xxhash
 noise = "0.8" # Procedural noise generation library.
 
-grid_2d = { version = "0.15", features = ["serialize"] } # A general purpose 2d grid
-coord_2d = { version = "0.3", features = ["serialize"] } # A general purpose 2d coordinate
-direction = { version = "0.18", features = ["rand", "serialize"] } # Representations of directions
+fortress = { path = "../fortress" }
 grid_shapes = { git = "https://github.com/Laocoon7/grid_shapes", rev = "9eabcd51ddca7fd3cfa90a7ada48161a206b6203", features = ["serde", "extentions"] }
 
 # keep the following in sync with Bevy's dependencies
